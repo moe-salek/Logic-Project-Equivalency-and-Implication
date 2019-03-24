@@ -58,20 +58,6 @@ public class Validation {
         for (int i = 0; i < input.length(); ++i) {
             char ch = input.charAt(i);
 
-            //NOT
-            if (ch == '~') {
-                if (i < input.length() - 1) {
-                    if (Parser.operators.containsKey(input.charAt(i + 1))) {
-                        System.out.println("Syntax Error: NOT must be used before variables");
-                        return false;
-                    }
-                }
-                else {
-                    System.out.println("Syntax Error: unaccepted NOT usage");
-                    return false;
-                }
-            }
-
             if ((i < input.length() - 1) && (i > 0) && Parser.operators.containsKey(ch)) {
                 if (Parser.operators.containsKey(input.charAt(i - 1)) ||
                         Parser.operators.containsKey(input.charAt(i + 1))) {

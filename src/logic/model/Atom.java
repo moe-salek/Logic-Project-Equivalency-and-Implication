@@ -4,7 +4,6 @@ public class Atom {
 
     private String ID;
     private Value value = Value.NOT_DEFINED;
-    private Boolean NOT = false;
 
     public Atom(String ID) {
         this.ID = ID;
@@ -22,19 +21,7 @@ public class Atom {
         this.value = value;
     }
 
-    public void setNOT(Boolean NOT) {
-        this.NOT = NOT;
-    }
-
     public Value getValue() {
-        if (NOT) {
-            if (value == Value.FALSE) {
-                return Value.TRUE;
-            }
-            else if (value == Value.TRUE) {
-                return Value.FALSE;
-            }
-        }
         return value;
     }
 }
