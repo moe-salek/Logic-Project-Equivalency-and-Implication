@@ -2,7 +2,8 @@ package logic.model;
 
 public enum Operator {
     OPERATOR_AND('^', 1),
-    OPERATOR_OR('v', 1);
+    OPERATOR_OR('v', 1),
+    OPERATOR_NOT('~', 2);
 
     private final Character sign;
     private final int priority;

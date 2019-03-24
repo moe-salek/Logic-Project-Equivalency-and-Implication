@@ -11,9 +11,10 @@ public class Parser {
     static {
         operators.put(Operator.OPERATOR_AND.getSign(), Operator.OPERATOR_AND.getPriority());
         operators.put(Operator.OPERATOR_OR.getSign(), Operator.OPERATOR_OR.getPriority());
+        operators.put(Operator.OPERATOR_NOT.getSign(), Operator.OPERATOR_NOT.getPriority());
     }
 
-    static String infixToPostfix(String input) {
+    public static String infixToPostfix(String input) {
         StringBuilder output = new StringBuilder();
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < input.length(); ++i) {
