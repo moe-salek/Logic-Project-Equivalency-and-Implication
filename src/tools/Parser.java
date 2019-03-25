@@ -14,7 +14,7 @@ public class Parser {
         operators.put(Operator.OPERATOR_NOT.getSign(), Operator.OPERATOR_NOT.getPriority());
     }
 
-    public static String infixToPostfix(String input) {
+    static String infixToPostfix(String input) {
         StringBuilder output = new StringBuilder();
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < input.length(); ++i) {
@@ -48,7 +48,7 @@ public class Parser {
         return output.toString();
     }
 
-    public static List<String> getVars(String input) {
+    static List<String> getVars(String input) {
         List<String> vars = new ArrayList<>();
         StringBuilder var = new StringBuilder();
         Queue<Character> queue = new LinkedList<>();
@@ -84,7 +84,7 @@ public class Parser {
         result[0] = getVars(input).size();
         for (int i = 0; i < input.length(); ++i) {
             char ch = input.charAt(i);
-            if (operators.containsKey(ch)) {
+            if (operators.containsKey(ch) && (ch != '~')) {
                 result[1]++;
             }
         }
@@ -93,6 +93,20 @@ public class Parser {
 
     public static String noSpace(String input) {
         return input.replaceAll("\\s", "");
+    }
+
+    public static String noDoubleNot(String input) {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < input.length(); ++i) {
+            char ch = input.charAt(i);
+            if ((i + 1 < input.length()) && (ch == '~') && (input.charAt(i + 1) == '~')) {
+                i = i + 1;
+            }
+            else {
+                output.append(ch);
+            }
+        }
+        return output.toString();
     }
 
 }

@@ -33,8 +33,7 @@ public class Controller {
             resultNum++;
             Text text = new Text(resultNum + " - " + result);
             text.setStyle("-fx-font: 13 arial;");
-            resultVBox.getChildren().add(text);
-            scrollPane.setVvalue(1.0);
+            resultVBox.getChildren().add(0, text);
         }
     }
 

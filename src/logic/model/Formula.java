@@ -1,11 +1,11 @@
 package logic.model;
 
-public class Statement {
+public class Formula {
 
     private String ID;
     private String postfix;
 
-    public Statement(String ID, String postfix) {
+    public Formula(String ID, String postfix) {
         this.ID = ID;
         this.postfix = postfix;
     }

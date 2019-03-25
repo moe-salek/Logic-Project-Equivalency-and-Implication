@@ -6,31 +6,30 @@ import java.util.List;
 public class Validation {
 
     public static boolean validate(String input) {
-        if (!isValid(input)) {
-            System.out.println("Error: Input is not valid");
-            return false;
-        }
-        return true;
+        return !isValid(input);
     }
 
     private static boolean isValid(String input) {
 
         if (input.length() == 0) {
-            System.out.println("Syntax Error: No statement");
+            System.out.println("Syntax Error: No Formulas");
             return false;
         }
 
         int indx = 0;
-        while((indx < input.length() - 1) && ((input.charAt(indx) == ')') || (input.charAt(indx) == '('))) {
+        while((indx < input.length() - 1) && ((input.charAt(indx) == ')') ||
+                (input.charAt(indx) == '(') ||
+                (input.charAt(indx) == '~'))) {
             ++indx;
         }
         if (Parser.operators.containsKey(input.charAt(indx))) {
             System.out.println("Syntax Error: Began with operator");
             return false;
         }
-
         indx = input.length() - 1;
-        while ((indx > 0) && ((input.charAt(indx) == ')') || (input.charAt(indx) == '('))) {
+        while ((indx > 0) && ((input.charAt(indx) == ')') ||
+                (input.charAt(indx) == '(')) ||
+                (input.charAt(indx) == '~')) {
             --indx;
         }
         if (Parser.operators.containsKey(input.charAt(indx))) {
@@ -40,10 +39,7 @@ public class Validation {
 
         int[] varAndOperatorCount = Parser.getVarAndOperatorCount(input);
         if ((varAndOperatorCount[0] - 1) != varAndOperatorCount[1]) {
-            if ((varAndOperatorCount[0] == 1) && (varAndOperatorCount[1] == 0)) {
-
-            }
-            else {
+            if ((varAndOperatorCount[0] != 1) || (varAndOperatorCount[1] != 0)) {
                 System.out.println("Syntax Error: Variable and operator number do not match");
                 return false;
             }
@@ -58,11 +54,32 @@ public class Validation {
         for (int i = 0; i < input.length(); ++i) {
             char ch = input.charAt(i);
 
-            if ((i < input.length() - 1) && (i > 0) && Parser.operators.containsKey(ch)) {
-                if (Parser.operators.containsKey(input.charAt(i - 1)) ||
-                        Parser.operators.containsKey(input.charAt(i + 1))) {
-                    System.out.println("Syntax Error: Operators next to each other");
+            if (ch == '~') {
+                if (i == input.length() - 1) {
+                    System.out.println("Syntax Error: ~ used in the end of formula");
                     return false;
+                }
+                if (i < input.length() - 1) {
+                    char nextCh = input.charAt(i + 1);
+                    if ((nextCh != '~') && Parser.operators.containsKey(nextCh)) {
+                        System.out.println("Syntax Error: ~ used before an operator");
+                        return false;
+                    }
+                }
+            }
+
+            if ((i < input.length() - 1) && (i > 0) && Parser.operators.containsKey(ch) && (ch != '~')) {
+                if (Parser.operators.containsKey(input.charAt(i - 1))) {
+                    if (input.charAt(i - 1) != '~'){
+                        System.out.println("Syntax Error: Operators next to each other");
+                        return false;
+                    }
+                }
+                else if (Parser.operators.containsKey(input.charAt(i + 1))) {
+                    if (input.charAt(i + 1) != '~') {
+                        System.out.println("Syntax Error: Operators next to each other");
+                        return false;
+                    }
                 }
             }
 

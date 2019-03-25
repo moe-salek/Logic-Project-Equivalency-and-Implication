@@ -1,7 +1,7 @@
 package tools;
 
 import logic.model.Atom;
-import logic.model.Statement;
+import logic.model.Formula;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,11 +21,11 @@ public class Assign {
         return allAtomList;
     }
 
-    public static Statement[] createStatements(String input0, String input1) {
-        Statement[] statements = new Statement[2];
-        statements[0] = new Statement("statement0", Parser.infixToPostfix(input0));
-        statements[1] = new Statement("statement1", Parser.infixToPostfix(input1));
-        return statements;
+    public static Formula[] createFormulas(String input0, String input1) {
+        Formula[] formulas = new Formula[2];
+        formulas[0] = new Formula("formula0", Parser.infixToPostfix(input0));
+        formulas[1] = new Formula("formula1", Parser.infixToPostfix(input1));
+        return formulas;
     }
 
 }

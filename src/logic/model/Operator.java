@@ -28,6 +28,9 @@ public enum Operator {
         else if (name == 'v') {
             return OPERATOR_OR;
         }
+        else if (name == '~') {
+            return OPERATOR_NOT;
+        }
         else {
             System.out.println("Operator Error: Operator not found");
         }

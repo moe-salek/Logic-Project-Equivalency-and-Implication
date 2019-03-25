@@ -22,6 +22,28 @@ public class Operation {
         return result;
     }
 
+    public static Value Operate(Value value, Operator operator) {
+        if (value.equals(Value.NOT_DEFINED)) {
+            System.out.println("Operation Error: The atom Value is NOT_DEFINED");
+            return null;
+        }
+        Value result;
+        if (operator == Operator.OPERATOR_NOT) {
+            result = notOperation(value);
+        } else {
+            System.out.println("Operation Error: Unknown operator");
+            result = null;
+        }
+        return result;
+    }
+
+    private static Value notOperation(Value value) {
+        if (value == Value.TRUE) {
+            return Value.FALSE;
+        }
+        return Value.TRUE;
+    }
+
     private static Value andOperation(Value value0, Value value1) {
         if (value0.equals(Value.TRUE) && value1.equals(Value.TRUE)) {
             return Value.TRUE;

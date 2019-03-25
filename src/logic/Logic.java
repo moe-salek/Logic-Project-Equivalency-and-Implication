@@ -15,13 +15,17 @@ public class Logic {
     private static int currentPhase;
 
     public static String function(String input0, String input1) {
-        input0 = Parser.noSpace(input0);
-        input1 = Parser.noSpace(input1);
-        if(!Validation.validate(input0) || !Validation.validate(input1)) {
+        String noSpaceInput0 = Parser.noSpace(input0);
+        String noSpaceInput1 = Parser.noSpace(input1);
+        input0 = noSpaceInput0;
+        input1 = noSpaceInput1;
+        if(Validation.validate(input0) || Validation.validate(input1)) {
             return null;
         }
+        input0 = Parser.noDoubleNot(input0);
+        input1 = Parser.noDoubleNot(input1);
         allAtoms = Assign.createAllAtoms(input0, input1);
-        Statement[] statements = Assign.createStatements(input0, input1);
+        Formula[] formulas = Assign.createFormulas(input0, input1);
         operators = new HashSet<>();
         for (Operator operator : Operator.values()) {
             operators.add(operator.getSign());
@@ -30,42 +34,42 @@ public class Logic {
         currentPhase = combinations.size();
 
         boolean check = true;
-        while (assignAtomValue(allAtoms) >= 0) {
-            Value s0Value = findColumnValue(statements[0].getPostfix());
-            Value s1Value = findColumnValue(statements[1].getPostfix());
-            if (!s0Value.equals(s1Value)) {
+        while (currentPhase >= 0) {
+            assignAtomValue(allAtoms);
+            Value f0Value = findColumnValue(formulas[0].getPostfix());
+            Value f1Value = findColumnValue(formulas[1].getPostfix());
+            if (!f0Value.equals(f1Value)) {
                 check = false;
                 break;
             }
         }
+
         String result;
         if (check) {
-            result = "\"" + input0 + "\"" + " and " + "\"" + input1 + "\"" + " ARE equal";
+            result = "Formulas: \"" + noSpaceInput0 + "\"" + " and " + "\"" + noSpaceInput1 + "\"" + " ARE equivalent.";
         } else {
-            result = "\"" + input0 + "\"" + " and " + "\"" + input1 + "\"" +  " are NOT equal";
+            result = "Formulas: \"" + noSpaceInput0 + "\"" + " and " + "\"" + noSpaceInput1 + "\"" +  " are NOT equivalent.";
         }
         return result;
     }
 
     private static Value findColumnValue(String postfix) {
-        if(Parser.getVars(postfix).size() == 1) {
-            for (Atom atom : allAtoms) {
-                if (atom.getID().equals(postfix)) {
-                    return atom.getValue();
-                }
-            }
-        }
         Stack<Value> stack = new Stack<>();
         Queue<Character> atomName = new LinkedList<>();
         for (int i = 0; i < postfix.length(); ++i) {
             char ch = postfix.charAt(i);
             if (operators.contains(ch)) {
-                if (stack.size() >= 2) {
+
+                if (ch == '~') {
+                    Value value = Operation.Operate(stack.pop(), Operator.getOperatorByName(ch));
+                    stack.add(value);
+                }
+                else if (stack.size() >= 2) {
                     Value value = Operation.Operate(stack.pop(), stack.pop(), Operator.getOperatorByName(ch));
                     stack.add(value);
                 }
                 else {
-                    System.out.println("Logic Error: Not enough values in queue");
+                    System.out.println("Logic Error: Not enough values in stack");
                 }
             }
             else {
@@ -82,14 +86,16 @@ public class Logic {
                 }
             }
         }
-        if (stack.size() != 1) {
+        if (stack.size() > 1) {
             System.out.println("Logic Error: More values in stack than expected");
+        }
+        else if (stack.size() < 1) {
+            System.out.println("Logic Error: No values in stack");
         }
         return stack.pop();
     }
 
-    //Returns the number of the left combinations:
-    private static int assignAtomValue(List<Atom> allAtoms) {
+    private static void assignAtomValue(List<Atom> allAtoms) {
         --currentPhase;
         if (currentPhase >= 0) {
             String phase = combinations.get(currentPhase);
@@ -101,7 +107,6 @@ public class Logic {
                 }
             }
         }
-        return currentPhase;
     }
 
     private static List<String> getCombinations(int num) {
