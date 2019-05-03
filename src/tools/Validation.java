@@ -17,22 +17,25 @@ public class Validation {
         }
 
         int indx = 0;
-        while((indx < input.length() - 1) && ((input.charAt(indx) == ')') ||
+        while((indx < input.length() - 1) &&
+                ((input.charAt(indx) == ')') ||
                 (input.charAt(indx) == '(') ||
                 (input.charAt(indx) == '~'))) {
             ++indx;
         }
-        if (Parser.operators.containsKey(input.charAt(indx))) {
+        if (input.charAt(indx) == '$') {
             System.out.println("Syntax Error: Began with operator");
             return false;
         }
+
         indx = input.length() - 1;
-        while ((indx > 0) && ((input.charAt(indx) == ')') ||
+        while ((indx > 0) &&
+                ((input.charAt(indx) == ')') ||
                 (input.charAt(indx) == '(')) ||
                 (input.charAt(indx) == '~')) {
             --indx;
         }
-        if (Parser.operators.containsKey(input.charAt(indx))) {
+        if (input.charAt(indx) == '@') {
             System.out.println("Syntax Error: Ended with operator");
             return false;
         }
@@ -61,22 +64,16 @@ public class Validation {
                 }
                 if (i < input.length() - 1) {
                     char nextCh = input.charAt(i + 1);
-                    if ((nextCh != '~') && Parser.operators.containsKey(nextCh)) {
+                    if (nextCh == '$') {
                         System.out.println("Syntax Error: ~ used before an operator");
                         return false;
                     }
                 }
             }
 
-            if ((i < input.length() - 1) && (i > 0) && Parser.operators.containsKey(ch) && (ch != '~')) {
-                if (Parser.operators.containsKey(input.charAt(i - 1))) {
+            if ((i < input.length() - 1) && (i > 0) && (ch == '$')) {
+                if (input.charAt(i - 1) == '@') {
                     if (input.charAt(i - 1) != '~'){
-                        System.out.println("Syntax Error: Operators next to each other");
-                        return false;
-                    }
-                }
-                else if (Parser.operators.containsKey(input.charAt(i + 1))) {
-                    if (input.charAt(i + 1) != '~') {
                         System.out.println("Syntax Error: Operators next to each other");
                         return false;
                     }

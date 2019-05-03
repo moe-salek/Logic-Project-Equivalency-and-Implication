@@ -21,10 +21,10 @@ public class Assign {
         return allAtomList;
     }
 
-    public static Formula[] createFormulas(String input0, String input1) {
+    public static Formula[] createFormulas(String postfix0, String postfix1) {
         Formula[] formulas = new Formula[2];
-        formulas[0] = new Formula("formula0", Parser.infixToPostfix(input0));
-        formulas[1] = new Formula("formula1", Parser.infixToPostfix(input1));
+        formulas[0] = new Formula("formula0", postfix0);
+        formulas[1] = new Formula("formula1", postfix1);
         return formulas;
     }
 

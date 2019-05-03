@@ -28,6 +28,7 @@ public class Controller {
 
     @FXML
     private void onSubmitBtnClicked() {
+
         String result = Logic.function(inputText0.getText(), inputText1.getText());
         if (result != null) {
             resultNum++;

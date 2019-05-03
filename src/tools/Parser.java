@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Parser {
 
-    static HashMap<Character, Integer> operators = new HashMap<>();
+    private static HashMap<String, Integer> operators = new HashMap<>();
 
     static {
         operators.put(Operator.OPERATOR_AND.getSign(), Operator.OPERATOR_AND.getPriority());
@@ -14,37 +14,56 @@ public class Parser {
         operators.put(Operator.OPERATOR_NOT.getSign(), Operator.OPERATOR_NOT.getPriority());
     }
 
-    static String infixToPostfix(String input) {
+    public static String infixToPostfix(String input) {
         StringBuilder output = new StringBuilder();
-        Stack<Character> stack = new Stack<>();
+        Stack<String> stackOprtr = new Stack<>();
         for (int i = 0; i < input.length(); ++i) {
             char ch = input.charAt(i);
-            if (operators.keySet().contains(ch)) {
-                while (!stack.isEmpty() &&
-                        operators.containsKey(stack.peek()) &&
-                        operators.get(stack.peek()) >= operators.get(ch)) {
-                    output.append(stack.pop());
-                }
-                stack.push(ch);
+
+            if ("abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(ch) != -1) {
+                output.append(ch);
             }
-            else {
+
+            else if (ch == '(' || ch == ')') {
                 if (ch == '(') {
-                    stack.push(ch);
-                }
-                else if (ch == ')') {
-                    while (stack.peek() != '(') {
-                        output.append(stack.pop() );
-                    }
-                    stack.pop();
+                    stackOprtr.push(ch + "");
                 }
                 else {
-                    output.append(ch);
+                    while (!stackOprtr.peek().equals("(")) {
+                        output.append(stackOprtr.pop());
+                    }
+                    stackOprtr.pop(); //trash the '('
                 }
             }
+
+            else if (ch == '$') {
+
+                //get the operator:
+                StringBuilder tmp = new StringBuilder();
+                do {
+                    tmp.append(ch);
+                    ++i;
+                    ch = input.charAt(i);
+                } while (ch != '@');
+                tmp.append('@');
+                String operator = tmp.toString();
+
+                while (!stackOprtr.isEmpty() &&
+                        !stackOprtr.peek().equals("(") &&
+                        (Operator.getOperatorByName(stackOprtr.peek().substring(1, stackOprtr.peek().length() - 1)).getPriority() >=
+                                Operator.getOperatorByName(operator.substring(1, operator.length() - 1)).getPriority() )
+                ) {
+                    output.append(stackOprtr.pop());
+                }
+
+                stackOprtr.push(operator);
+            }
+
         }
-        while (!stack.isEmpty()) {
-            output.append(stack.pop());
+        while (!stackOprtr.isEmpty()) {
+            output.append(stackOprtr.pop());
         }
+//        System.out.println(output.toString());
         return output.toString();
     }
 
@@ -52,18 +71,24 @@ public class Parser {
         List<String> vars = new ArrayList<>();
         StringBuilder var = new StringBuilder();
         Queue<Character> queue = new LinkedList<>();
+        boolean iteratingOperator = false;
         for (int i = 0; i < input.length(); ++i) {
             char ch = input.charAt(i);
-            if (ch != '(' &&
+            if (ch == '$') {
+                iteratingOperator = true;
+            }
+            else if (ch == '@') {
+                iteratingOperator = false;
+            }
+            else if (ch != '(' &&
                     ch != ')' &&
-                    !operators.containsKey(ch) &&
+                    !iteratingOperator &&
                     i != (input.length() - 1)) {
                 queue.add(ch);
             }
             else {
                 if (ch != '(' &&
                         ch != ')' &&
-                        !operators.containsKey(ch) &&
                         i == (input.length() - 1)) {
                     queue.add(ch);
                 }
@@ -82,10 +107,13 @@ public class Parser {
     static int[] getVarAndOperatorCount(String input) {
         int[] result = new int[2];
         result[0] = getVars(input).size();
-        for (int i = 0; i < input.length(); ++i) {
-            char ch = input.charAt(i);
-            if (operators.containsKey(ch) && (ch != '~')) {
-                result[1]++;
+        for (String operator : operators.keySet()) {
+            int idx = 0;
+            while (idx != -1) {
+                idx = input.indexOf(operator, idx + 1);
+                if (idx != -1) {
+                    ++result[1];
+                }
             }
         }
         return result;
@@ -107,6 +135,19 @@ public class Parser {
             }
         }
         return output.toString();
+    }
+
+    public static String putSignForOperator(String input) {
+        String output = input;
+        for (String operator : operators.keySet()) {
+            int idx = output.indexOf(operator);
+            while (idx != -1) {
+                output = output.substring(0, idx) + "$" + output.substring(idx, idx + operator.length()) + '@' +
+                        output.substring(idx + operator.length());
+                idx = output.indexOf(operator, idx + operator.length() + 2);
+            }
+        }
+        return output;
     }
 
 }
