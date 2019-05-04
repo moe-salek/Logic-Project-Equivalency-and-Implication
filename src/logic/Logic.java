@@ -4,7 +4,7 @@ import debugging.Log;
 import logic.model.*;
 import tools.Assign;
 import tools.Parser;
-import tools.Validation;
+import tools.Syntax;
 
 import java.util.*;
 
@@ -28,21 +28,21 @@ public class Logic {
         Log.write_head("No Space");
         Log.write_info(noSpaceInput0);
 
-        input0 = Parser.putSignForOperator(input0);
-        input1 = Parser.putSignForOperator(input1);
+        String noDNot0 = Parser.noDoubleNot(input0);
+        String noDNot1 = Parser.noDoubleNot(input1);
+        Log.write_head("No Double NOT");
+        Log.write_info(noDNot0);
+
+        input0 = Parser.putSignForOperator(noDNot0);
+        input1 = Parser.putSignForOperator(noDNot1);
         Log.write_head("SignForOperator");
         Log.write_info(input0);
 
-        if (Validation.validate(input0) || Validation.validate(input1)) {
+        if (Syntax.validate(input0) || Syntax.validate(input1)) {
             return null;
         }
-        Log.write_head("Validation");
+        Log.write_head("Syntax");
         Log.write_info("validated");
-
-        input0 = Parser.noDoubleNot(input0);
-        input1 = Parser.noDoubleNot(input1);
-        Log.write_head("No Double NOT");
-        Log.write_info(input0);
 
         String postfix0 = Parser.infixToPostfix(input0);
         String postfix1 = Parser.infixToPostfix(input1);
@@ -83,9 +83,9 @@ public class Logic {
 
         String result;
         if (check) {
-            result = "Formulas: \"" + noSpaceInput0 + "\"" + " and " + "\"" + noSpaceInput1 + "\"" + " ARE equivalent.";
+            result = "Formulas: \"" + noDNot0 + "\"" + " and " + "\"" + noDNot1 + "\"" + " ARE equivalent.";
         } else {
-            result = "Formulas: \"" + noSpaceInput0 + "\"" + " and " + "\"" + noSpaceInput1 + "\"" +  " are NOT equivalent.";
+            result = "Formulas: \"" + noDNot0 + "\"" + " and " + "\"" + noDNot1 + "\"" +  " are NOT equivalent.";
         }
 
         Log.finish();

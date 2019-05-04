@@ -1,5 +1,6 @@
 package tools;
 
+import logic.model.Characters;
 import logic.model.Operator;
 
 import java.util.*;
@@ -20,7 +21,7 @@ public class Parser {
         for (int i = 0; i < input.length(); ++i) {
             char ch = input.charAt(i);
 
-            if ("abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(ch) != -1) {
+            if (Characters.getChars4Var().indexOf(ch) != -1) {
                 output.append(ch);
             }
 
@@ -108,6 +109,9 @@ public class Parser {
         int[] result = new int[2];
         result[0] = getVars(input).size();
         for (String operator : operators.keySet()) {
+            if (operator.equals("~")) {
+                continue;
+            }
             int idx = 0;
             while (idx != -1) {
                 idx = input.indexOf(operator, idx + 1);

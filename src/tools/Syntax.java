@@ -1,9 +1,11 @@
 package tools;
 
+import logic.model.Characters;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Validation {
+public class Syntax {
 
     public static boolean validate(String input) {
         return !isValid(input);
@@ -24,8 +26,10 @@ public class Validation {
             ++indx;
         }
         if (input.charAt(indx) == '$') {
-            System.out.println("Syntax Error: Began with operator");
-            return false;
+            if (input.charAt(indx + 1) != '~') {
+                System.out.println("Syntax Error: Began with operator");
+                return false;
+            }
         }
 
         indx = input.length() - 1;
@@ -62,20 +66,29 @@ public class Validation {
                     System.out.println("Syntax Error: ~ used in the end of formula");
                     return false;
                 }
-                if (i < input.length() - 1) {
-                    char nextCh = input.charAt(i + 1);
+                if (i < input.length() - 2) {
+                    char nextCh = input.charAt(i + 2);
                     if (nextCh == '$') {
                         System.out.println("Syntax Error: ~ used before an operator");
                         return false;
                     }
                 }
+                if (i > 0) {
+                    char prevChr = input.charAt(i - 1);
+                    if ((prevChr == ')') || (prevChr == '(') || (Characters.getChars4Var().indexOf(prevChr) != -1)) {
+                        System.out.println("Syntax Error: ~ used after var/parentheses");
+                        return false;
+                    }
+                }
             }
 
-            if ((i < input.length() - 1) && (i > 0) && (ch == '$')) {
-                if (input.charAt(i - 1) == '@') {
-                    if (input.charAt(i - 1) != '~'){
-                        System.out.println("Syntax Error: Operators next to each other");
-                        return false;
+            if ((i < input.length() - 1) && (i > 1) && (ch == '$')) {
+                if (input.charAt(i + 1) != '~') {
+                    if (input.charAt(i - 1) == '@') {
+                        if (input.charAt(i - 2) != '~') {
+                            System.out.println("Syntax Error: Operators next to each other");
+                            return false;
+                        }
                     }
                 }
             }
