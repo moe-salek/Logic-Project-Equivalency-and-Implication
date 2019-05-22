@@ -17,6 +17,7 @@ public class Log {
     }
 
     public static void write_head(String head) {
+        out.append("\n");
         try {
             out.append(String.valueOf(line)).append(". ").append(head).append(": ").append("\n");
             ++line;
@@ -27,7 +28,7 @@ public class Log {
 
     public static void write_info(String info) {
         try {
-            out.append("\t").append(info).append("\n\n");
+            out.append("\t").append(info).append("\n");
         } catch (Exception e) {
             e.printStackTrace();
         }

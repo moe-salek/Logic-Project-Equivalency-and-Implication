@@ -19,35 +19,41 @@ public class Logic {
 
         Log.init();
         Log.write_head("Original");
-        Log.write_info(input0);
+        Log.write_info("F0: " + input0);
+        Log.write_info("F1: " + input1);
 
         String noSpaceInput0 = Parser.noSpace(input0);
         String noSpaceInput1 = Parser.noSpace(input1);
         input0 = noSpaceInput0;
         input1 = noSpaceInput1;
         Log.write_head("No Space");
-        Log.write_info(noSpaceInput0);
+        Log.write_info("F0: " + noSpaceInput0);
+        Log.write_info("F1: " + noSpaceInput1);
 
         String noDNot0 = Parser.noDoubleNot(input0);
         String noDNot1 = Parser.noDoubleNot(input1);
         Log.write_head("No Double NOT");
-        Log.write_info(noDNot0);
+        Log.write_info("F0: " + noDNot0);
+        Log.write_info("F1: " + noDNot1);
 
         input0 = Parser.putSignForOperator(noDNot0);
         input1 = Parser.putSignForOperator(noDNot1);
         Log.write_head("SignForOperator");
-        Log.write_info(input0);
+        Log.write_info("F0: " + input0);
+        Log.write_info("F1: " + input1);
 
         if (Syntax.validate(input0) || Syntax.validate(input1)) {
             return null;
         }
         Log.write_head("Syntax");
-        Log.write_info("validated");
+        Log.write_info("F0: " + "validated");
+        Log.write_info("F1: " + "validated");
 
         String postfix0 = Parser.infixToPostfix(input0);
         String postfix1 = Parser.infixToPostfix(input1);
         Log.write_head("To Postfix");
-        Log.write_info(postfix0);
+        Log.write_info("F0: " + postfix0);
+        Log.write_info("F1: " + postfix1);
 
         allAtoms = Assign.createAllAtoms(input0, input1);
         Log.write_head("Atoms Created");
@@ -57,36 +63,58 @@ public class Logic {
 
         Formula[] formulas = Assign.createFormulas(postfix0, postfix1);
         Log.write_head("Formula Created");
-        Log.write_info(formulas[0].getID());
+        Log.write_info("F0: " + formulas[0].getID());
+        Log.write_info("F1: " + formulas[1].getID());
 
         operators = new HashSet<>();
         for (Operator operator : Operator.values()) {
             operators.add(operator.getSign());
         }
-        Log.write_head("Operators");
-        tmp = new StringBuilder();
-        for (String operator : operators) { tmp.append(operator); tmp.append(" "); }
-        Log.write_info(tmp.toString());
 
         combinations = getCombinations(allAtoms.size());
         currentPhase = combinations.size();
-        boolean check = true;
+        boolean equCheck = true;
+        boolean impCheck = true;
+        Log.write_head("Satisfy");
         while (currentPhase >= 0) {
             assignAtomValue(allAtoms);
             Value f0Value = findColumnValue(formulas[0].getPostfix());
             Value f1Value = findColumnValue(formulas[1].getPostfix());
+
+            StringBuilder tmpAtomValue = new StringBuilder();
+            tmpAtomValue.append("values: ");
+            for (Atom atom : allAtoms) {
+                tmpAtomValue.append(atom.getID()).append(": ").append(atom.getValue()).append(" / ");
+            }
+            tmpAtomValue.replace(tmpAtomValue.length() - 2, tmpAtomValue.length() - 1, "");
+            Log.write_info(tmpAtomValue.toString());
+            Log.write_info("F0: " + f0Value.toString());
+            Log.write_info("F1: " + f1Value.toString());
+
             if (!f0Value.equals(f1Value)) {
-                check = false;
-                break;
+                equCheck = false;
+            }
+
+            if (Operation.Operate(f1Value, f0Value, Operator.OPERATOR_IMP) != Value.TRUE) {
+                impCheck = false;
             }
         }
 
         String result;
-        if (check) {
-            result = "Formulas: \"" + noDNot0 + "\"" + " and " + "\"" + noDNot1 + "\"" + " ARE equivalent.";
+        result = "Formula \"" + noDNot0 + "\" ";
+        if (impCheck) {
+            result += "[IMPLIES]";
         } else {
-            result = "Formulas: \"" + noDNot0 + "\"" + " and " + "\"" + noDNot1 + "\"" +  " are NOT equivalent.";
+            result += "does [NOT imply]";
         }
+        if (equCheck) {
+            result += " / is [EQUIVALENT] to]";
+        } else {
+            result += " / is [NOT equivalent] to";
+        }
+        result += " \"" + noDNot1 + "\".";
+        Log.write_head("Result");
+        Log.write_info(result);
 
         Log.finish();
         return result;
@@ -95,7 +123,6 @@ public class Logic {
     private static Value findColumnValue(String postfix) {
         Stack<Value> stack = new Stack<>();
         Queue<Character> atomName = new LinkedList<>();
-        StringBuilder tmp = new StringBuilder();
         for (int i = 0; i < postfix.length(); ++i) {
             char ch = postfix.charAt(i);
 

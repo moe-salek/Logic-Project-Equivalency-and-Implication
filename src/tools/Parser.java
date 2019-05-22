@@ -13,6 +13,8 @@ public class Parser {
         operators.put(Operator.OPERATOR_AND.getSign(), Operator.OPERATOR_AND.getPriority());
         operators.put(Operator.OPERATOR_OR.getSign(), Operator.OPERATOR_OR.getPriority());
         operators.put(Operator.OPERATOR_NOT.getSign(), Operator.OPERATOR_NOT.getPriority());
+        operators.put(Operator.OPERATOR_IMP.getSign(), Operator.OPERATOR_IMP.getPriority());
+        operators.put(Operator.OPERATOR_IFF.getSign(), Operator.OPERATOR_IFF.getPriority());
     }
 
     public static String infixToPostfix(String input) {
