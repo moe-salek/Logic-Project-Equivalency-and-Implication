@@ -1,11 +1,11 @@
 package tools;
 
-import logic.model.Characters;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Syntax {
+
+    private static String acceptedCharacter4Var = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     public static boolean validate(String input) {
         return !isValid(input);
@@ -75,7 +75,7 @@ public class Syntax {
                 }
                 if (i > 0) {
                     char prevChr = input.charAt(i - 1);
-                    if ((prevChr == ')') || (prevChr == '(') || (Characters.getChars4Var().indexOf(prevChr) != -1)) {
+                    if ((prevChr == ')') || (prevChr == '(') || (getChars4Var().indexOf(prevChr) != -1)) {
                         System.out.println("Syntax Error: ~ used after var/parentheses");
                         return false;
                     }
@@ -116,6 +116,10 @@ public class Syntax {
         }
 
         return true;
+    }
+
+    public static String getChars4Var() {
+        return acceptedCharacter4Var;
     }
 
 }

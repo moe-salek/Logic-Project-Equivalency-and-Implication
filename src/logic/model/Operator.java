@@ -1,5 +1,7 @@
 package logic.model;
 
+import java.util.HashMap;
+
 public enum Operator {
 
     OPERATOR_NOT("~", 3),
@@ -10,6 +12,20 @@ public enum Operator {
 
     private final String sign;
     private final int priority;
+
+    private static HashMap<String, Integer> operators = new HashMap<>();
+
+    static {
+        operators.put(Operator.OPERATOR_AND.getSign(), Operator.OPERATOR_AND.getPriority());
+        operators.put(Operator.OPERATOR_OR.getSign(), Operator.OPERATOR_OR.getPriority());
+        operators.put(Operator.OPERATOR_NOT.getSign(), Operator.OPERATOR_NOT.getPriority());
+        operators.put(Operator.OPERATOR_IMP.getSign(), Operator.OPERATOR_IMP.getPriority());
+        operators.put(Operator.OPERATOR_IFF.getSign(), Operator.OPERATOR_IFF.getPriority());
+    }
+
+    public static HashMap<String, Integer> getOperators() {
+        return operators;
+    }
 
     Operator(final String sign, final int priority) {
         this.sign = sign;

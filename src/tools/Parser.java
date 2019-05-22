@@ -1,20 +1,15 @@
 package tools;
 
-import logic.model.Characters;
 import logic.model.Operator;
 
 import java.util.*;
 
 public class Parser {
 
-    private static HashMap<String, Integer> operators = new HashMap<>();
+    private static HashMap<String, Integer> operators;
 
     static {
-        operators.put(Operator.OPERATOR_AND.getSign(), Operator.OPERATOR_AND.getPriority());
-        operators.put(Operator.OPERATOR_OR.getSign(), Operator.OPERATOR_OR.getPriority());
-        operators.put(Operator.OPERATOR_NOT.getSign(), Operator.OPERATOR_NOT.getPriority());
-        operators.put(Operator.OPERATOR_IMP.getSign(), Operator.OPERATOR_IMP.getPriority());
-        operators.put(Operator.OPERATOR_IFF.getSign(), Operator.OPERATOR_IFF.getPriority());
+        operators = Operator.getOperators();
     }
 
     public static String infixToPostfix(String input) {
@@ -23,7 +18,7 @@ public class Parser {
         for (int i = 0; i < input.length(); ++i) {
             char ch = input.charAt(i);
 
-            if (Characters.getChars4Var().indexOf(ch) != -1) {
+            if (Syntax.getChars4Var().indexOf(ch) != -1) {
                 output.append(ch);
             }
 
@@ -66,7 +61,6 @@ public class Parser {
         while (!stackOprtr.isEmpty()) {
             output.append(stackOprtr.pop());
         }
-//        System.out.println(output.toString());
         return output.toString();
     }
 

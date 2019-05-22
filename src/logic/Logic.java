@@ -11,7 +11,6 @@ import java.util.*;
 public class Logic {
 
     private static List<Atom> allAtoms ;
-    private static HashSet<String> operators;
     private static List<String> combinations;
     private static int currentPhase;
 
@@ -66,11 +65,6 @@ public class Logic {
         Log.write_info("F0: " + formulas[0].getID());
         Log.write_info("F1: " + formulas[1].getID());
 
-        operators = new HashSet<>();
-        for (Operator operator : Operator.values()) {
-            operators.add(operator.getSign());
-        }
-
         combinations = getCombinations(allAtoms.size());
         currentPhase = combinations.size();
         boolean equCheck = true;
@@ -108,7 +102,7 @@ public class Logic {
             result += "does [NOT imply]";
         }
         if (equCheck) {
-            result += " / is [EQUIVALENT] to]";
+            result += " / is [EQUIVALENT] to";
         } else {
             result += " / is [NOT equivalent] to";
         }
