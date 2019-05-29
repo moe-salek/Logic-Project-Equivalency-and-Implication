@@ -36,6 +36,7 @@ public class Log {
 
     public static void finish() {
         out.close();
+        line = 1;
     }
 
 }

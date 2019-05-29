@@ -139,8 +139,17 @@ public class Parser {
 
     public static String putSignForOperator(String input) {
         String output = input;
+
+        String opr = Operator.OPERATOR_IFF.getSign(); //fixes bug: <-> never recognized because of ->
+        int idx = output.indexOf(opr);
+        while (idx != -1) {
+            output = output.substring(0, idx) + "$" + output.substring(idx, idx + opr.length()) + '@' +
+                    output.substring(idx + opr.length());
+            idx = output.indexOf(opr, idx + opr.length() + 2);
+        }
+
         for (String operator : operators.keySet()) {
-            int idx = output.indexOf(operator);
+            idx = output.indexOf(operator);
             while (idx != -1) {
                 output = output.substring(0, idx) + "$" + output.substring(idx, idx + operator.length()) + '@' +
                         output.substring(idx + operator.length());

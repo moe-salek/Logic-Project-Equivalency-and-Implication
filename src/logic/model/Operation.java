@@ -18,10 +18,9 @@ public class Operation {
             case OPERATOR_IMP:
                 result = impOperation(value0, value1);
                 break;
-//            case OPERATOR_IFF:
-                //TODO: implement this kid
-//                result = orOperation(value0, value1);
-//                break;
+            case OPERATOR_IFF:
+                result = iffOperation(value0, value1);
+                break;
             default:
                 System.out.println("Operation Error: Unknown operator");
                 result = null;
@@ -66,9 +65,11 @@ public class Operation {
     }
 
     private static Value impOperation(Value value0, Value value1) {
-//        System.out.println("Input: " + value0 + " and " + value1);
-//        System.out.println("Output: " + orOperation(notOperation(value0), value1));
         return orOperation(value0, notOperation(value1)); //NOT the 2nd, cuz in stack 2nd is 1st
+    }
+
+    private static Value iffOperation(Value value0, Value value1) {
+        return andOperation(orOperation(value0, notOperation(value1)), orOperation(value1, notOperation(value0)));
     }
 
 }

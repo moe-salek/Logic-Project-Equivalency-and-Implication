@@ -61,9 +61,7 @@ public class Logic {
         Log.write_info(tmp.toString());
 
         Formula[] formulas = Assign.createFormulas(postfix0, postfix1);
-        Log.write_head("Formula Created");
-        Log.write_info("F0: " + formulas[0].getID());
-        Log.write_info("F1: " + formulas[1].getID());
+        Log.write_head("Formulas Created");
 
         combinations = getCombinations(allAtoms.size());
         currentPhase = combinations.size();
@@ -97,14 +95,14 @@ public class Logic {
         String result;
         result = "Formula \"" + noDNot0 + "\" ";
         if (impCheck) {
-            result += "[IMPLIES]";
+            result += "[ IMPLIES ]";
         } else {
-            result += "does [NOT imply]";
+            result += "does [ NOT imply ]";
         }
         if (equCheck) {
-            result += " / is [EQUIVALENT] to";
+            result += " / is [ EQUIVALENT ] to";
         } else {
-            result += " / is [NOT equivalent] to";
+            result += " / is [ NOT equivalent ] to";
         }
         result += " \"" + noDNot1 + "\".";
         Log.write_head("Result");

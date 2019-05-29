@@ -8,11 +8,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="357.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextArea fx:id="inputText0" layoutX="32.0" layoutY="27.0" prefHeight="100.0" prefWidth="280.0" wrapText="true" />
-      <TextArea fx:id="inputText1" layoutX="339.0" layoutY="27.0" prefHeight="100.0" prefWidth="280.0" />
-      <Button fx:id="submitBtn" defaultButton="true" layoutX="195.0" layoutY="147.0" mnemonicParsing="false" onAction="#onSubmitBtnClicked" prefHeight="43.0" prefWidth="261.0" text="Submit" textAlignment="CENTER">
+      <TextArea fx:id="inputText0" layoutX="32.0" layoutY="41.0" prefHeight="93.0" prefWidth="280.0" wrapText="true" />
+      <TextArea fx:id="inputText1" layoutX="339.0" layoutY="41.0" prefHeight="93.0" prefWidth="287.0" />
+      <Button fx:id="submitBtn" defaultButton="true" layoutX="210.0" layoutY="152.0" mnemonicParsing="false" onAction="#onSubmitBtnClicked" prefHeight="38.0" prefWidth="231.0" text="Submit" textAlignment="CENTER">
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -26,5 +26,13 @@
             <Font name="System Italic" size="12.0" />
          </font>
       </Text>
+      <Text fill="#8c8c8c" layoutX="32.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Formula 1:">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font></Text>
+      <Text fill="#8c8c8c" layoutX="339.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Formula 2:">
+         <font>
+            <Font name="System Italic" size="12.0" />
+         </font></Text>
    </children>
 </AnchorPane>
