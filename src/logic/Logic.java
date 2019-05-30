@@ -90,6 +90,10 @@ public class Logic {
             if (Operation.Operate(f1Value, f0Value, Operator.OPERATOR_IMP) != Value.TRUE) {
                 impCheck = false;
             }
+
+            if (!impCheck) {
+                break;
+            }
         }
 
         String result;
