@@ -9,7 +9,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        primaryStage.setTitle("Logic Project - By Mohammad Salek");
+        primaryStage.setTitle("Logic Project: Equivalency and Implication");
         final FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("visual/app.fxml"));
         fxmlLoader.setController(new Controller());
@@ -23,4 +23,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

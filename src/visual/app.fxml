@@ -9,184 +9,75 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-            prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <TextArea fx:id="inputText0" layoutX="312.0" layoutY="29.0" prefHeight="93.0" prefWidth="469.0" wrapText="true"/>
-   <TextArea fx:id="inputText1" layoutX="309.0" layoutY="144.0" prefHeight="93.0" prefWidth="469.0"/>
-   <Button fx:id="submitBtn" defaultButton="true" layoutX="309.0" layoutY="385.0" mnemonicParsing="false"
-           onAction="#onSubmitBtnClicked" prefHeight="49.0" prefWidth="476.0" text="Submit" textAlignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <TextArea fx:id="inputText0" layoutX="285.0" layoutY="34.0" prefHeight="93.0" prefWidth="496.0" wrapText="true" />
+   <TextArea fx:id="inputText1" layoutX="285.0" layoutY="150.0" prefHeight="93.0" prefWidth="496.0" />
+   <Button fx:id="submitBtn" defaultButton="true" layoutX="309.0" layoutY="387.0" mnemonicParsing="false" onAction="#onSubmitBtnClicked" prefHeight="56.0" prefWidth="476.0" text="Submit" textAlignment="CENTER">
       <font>
-         <Font size="14.0"/>
+         <Font name="System Bold" size="16.0" />
       </font>
    </Button>
-   <ScrollPane fx:id="scrollPane" layoutX="309.0" layoutY="264.0" prefHeight="103.0" prefWidth="469.0">
-      <VBox fx:id="resultVBox" prefHeight="100.0" prefWidth="449.0" spacing="5.0"/>
+   <ScrollPane fx:id="scrollPane" layoutX="285.0" layoutY="266.0" prefHeight="93.0" prefWidth="496.0">
+      <VBox fx:id="resultVBox" prefHeight="86.0" prefWidth="486.0" spacing="5.0" />
    </ScrollPane>
-   <Text fx:id="resultText" fill="#00000089" layoutX="319.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0"
-         text="Results:" wrappingWidth="58.66015625">
+   <Text fx:id="resultText" fill="#901f1f" layoutX="291.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Results:" wrappingWidth="58.66015625">
       <font>
-         <Font name="System Italic" size="12.0"/>
+         <Font name="System Italic" size="12.0" />
       </font>
    </Text>
-   <Text fill="#8c8c8c" layoutX="319.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Formula 1:">
+   <Text fill="#901f1f" layoutX="292.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Formula One:">
       <font>
-         <Font name="System Italic" size="12.0"/>
+         <Font name="System Italic" size="12.0" />
       </font>
    </Text>
-   <Text fill="#8c8c8c" layoutX="319.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Formula 2:">
+   <Text fill="#901f1f" layoutX="291.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Formula Two:">
       <font>
-         <Font name="System Italic" size="12.0"/>
+         <Font name="System Italic" size="12.0" />
       </font>
    </Text>
-   <Text fx:id="resultText1" fill="#00000089" layoutX="23.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0"
-         text="Help:" wrappingWidth="41.66015625">
+   <Text fx:id="resultText1" fill="#8c8c8c" layoutX="23.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Help:" wrappingWidth="41.66015625">
       <font>
-         <Font name="System Italic" size="12.0"/>
+         <Font name="System Italic" size="12.0" />
       </font>
    </Text>
    <ScrollPane fx:id="scrollPane1" layoutX="14.0" layoutY="373.0" prefHeight="213.0" prefWidth="277.0">
-      <VBox fx:id="resultVBox1" prefHeight="431.0" prefWidth="251.0" spacing="5.0">
+      <VBox fx:id="helpVbox" prefHeight="211.0" prefWidth="254.0" spacing="5.0">
          <padding>
-            <Insets left="5.0" top="5.0"/>
+            <Insets left="5.0" top="5.0" />
          </padding>
-         <Text fx:id="resultText1111131221" fill="#00000089" layoutX="15.0" layoutY="418.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text="- Summary:" wrappingWidth="89.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText11" fill="#00000089" strokeType="OUTSIDE" strokeWidth="0.0"
-               text="Enter two formulas in each section and press the button to see the results obtained from comparing  them."
-               textAlignment="JUSTIFY" wrappingWidth="250.0">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText1111131211" fill="#00000089" layoutX="15.0" layoutY="101.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text=" " wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText11111312111" fill="#00000089" layoutX="15.0" layoutY="101.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text="- Usage:" wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText111113121111" fill="#00000089" layoutX="15.0" layoutY="120.0" strokeType="OUTSIDE"
-               strokeWidth="0.0"
-               text="Use any [A-Z][a-z] letter to indicate an Atom - exception: letter &quot;v&quot; is dedicated for OR symbol."
-               textAlignment="JUSTIFY" wrappingWidth="250.0">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText111113121" fill="#00000089" layoutX="15.0" layoutY="215.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text=" " wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText111" fill="#00000089" layoutX="15.0" layoutY="26.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text="- Symbols:" wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText1111" fill="#00000089" layoutX="15.0" layoutY="101.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text="&quot;~&quot; : NOT" textAlignment="JUSTIFY" wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText11111" fill="#00000089" layoutX="15.0" layoutY="120.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text="&quot;v&quot; : OR" textAlignment="JUSTIFY" wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText111111" fill="#00000089" layoutX="15.0" layoutY="139.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text="&quot;^&quot; : AND" textAlignment="JUSTIFY" wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText111112" fill="#00000089" layoutX="15.0" layoutY="139.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text="&quot;-&gt;&quot; : IMPLY" textAlignment="JUSTIFY"
-               wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText111113" fill="#00000089" layoutX="15.0" layoutY="139.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text="&quot;&lt;-&gt;&quot; : XNOR" textAlignment="JUSTIFY"
-               wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText11111312" fill="#00000089" layoutX="15.0" layoutY="215.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text=" " wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText1111131" fill="#00000089" layoutX="15.0" layoutY="196.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text="- Usage Example:" wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText11111311" fill="#00000089" layoutX="15.0" layoutY="215.0" strokeType="OUTSIDE"
-               strokeWidth="0.0"
-               text="f1: &quot;A -&gt; B&quot;, f2: &quot;~A v B&quot;, (Submit), (Result: Equivalent and Implies)"
-               textAlignment="JUSTIFY" wrappingWidth="250.0">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
-         <Text fx:id="resultText111113122" fill="#00000089" layoutX="15.0" layoutY="234.0" strokeType="OUTSIDE"
-               strokeWidth="0.0" text=" " wrappingWidth="159.66015625">
-            <font>
-               <Font name="System Italic" size="12.0"/>
-            </font>
-         </Text>
       </VBox>
    </ScrollPane>
-   <ScrollPane fx:id="scrollPane2" layoutX="14.0" layoutY="28.0" prefHeight="303.0" prefWidth="277.0">
-      <VBox fx:id="resultVBox2" prefHeight="283.0" prefWidth="250.0" spacing="5.0"/>
+   <ScrollPane fx:id="scrollPane2" layoutX="14.0" layoutY="28.0" prefHeight="323.0" prefWidth="242.0">
+      <VBox fx:id="detailsVbox" prefHeight="307.0" prefWidth="235.0" spacing="5.0" />
    </ScrollPane>
    <Text fill="#8c8c8c" layoutX="23.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details and Logs:">
       <font>
-         <Font name="System Italic" size="12.0"/>
+         <Font name="System Italic" size="12.0" />
       </font>
    </Text>
-   <Button fx:id="submitBtn1" defaultButton="true" layoutX="309.0" layoutY="450.0" mnemonicParsing="false"
-           prefHeight="29.0" prefWidth="476.0" text="Save Results"
-           textAlignment="CENTER">
+   <Button fx:id="saveResultsBtn" defaultButton="true" layoutX="309.0" layoutY="459.0" mnemonicParsing="false" onAction="#onSaveResultsBtn" prefHeight="49.0" prefWidth="228.0" text="Save Results" textAlignment="CENTER">
       <font>
-         <Font size="14.0"/>
+         <Font name="System Bold" size="14.0" />
       </font>
    </Button>
-   <Button fx:id="submitBtn11" defaultButton="true" layoutX="309.0" layoutY="482.0" mnemonicParsing="false"
-           prefHeight="29.0" prefWidth="476.0" text="Save Logs (last submit)"
-           textAlignment="CENTER">
+   <Button fx:id="saveLogsBtn" defaultButton="true" layoutX="309.0" layoutY="515.0" mnemonicParsing="false" onAction="#onSaveLogsBtn" prefHeight="49.0" prefWidth="228.0" text="Save Logs (last submit)" textAlignment="CENTER">
       <font>
-         <Font size="14.0"/>
+         <Font name="System Bold" size="14.0" />
       </font>
    </Button>
-   <Button fx:id="submitBtn111" defaultButton="true" layoutX="311.0" layoutY="525.0" mnemonicParsing="false"
-            prefHeight="29.0" prefWidth="476.0" text="Clear Screen"
-           textAlignment="CENTER">
+   <Button fx:id="clearBtn" layoutX="558.0" layoutY="459.0" mnemonicParsing="false" onAction="#onClearBtn" prefHeight="49.0" prefWidth="228.0" text="Clear Screen" textAlignment="CENTER">
       <font>
-         <Font size="14.0"/>
+         <Font name="System Bold" size="14.0" />
       </font>
    </Button>
-   <Button fx:id="submitBtn1111" defaultButton="true" layoutX="312.0" layoutY="557.0" mnemonicParsing="false"
-            prefHeight="29.0" prefWidth="476.0" text="Exit" textAlignment="CENTER">
+   <Button fx:id="exitBtn" layoutX="558.0" layoutY="515.0" mnemonicParsing="false" onAction="#onExitBtn" prefHeight="49.0" prefWidth="228.0" text="Exit" textAlignment="CENTER">
       <font>
-         <Font size="14.0"/>
+         <Font name="System Bold" size="14.0" />
       </font>
    </Button>
+   <Text fill="#8c8c8c" layoutX="343.0" layoutY="590.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copyright © 2019 Mohammad Salek. Some Rights Reserved." textAlignment="CENTER" wrappingWidth="408.74608039855957">
+      <font>
+         <Font size="11.0" />
+      </font>
+   </Text>
 </AnchorPane>
