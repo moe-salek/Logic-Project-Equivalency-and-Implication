@@ -1,5 +1,4 @@
 # Logic Project: Equivalency and Implication
-Logic Project: Equivalency and Implication
 
 - Summary:
 Enter two formulas in each specified section and press "Submit" button to see the results obtained from them.
@@ -20,3 +19,7 @@ Press "Submit" when both formulas were entered.
 
 - Example:
 f1: "A -> B", f2: "~A v B", (Submit), (Result: Equivalent and Implies)
+
+## Screenshot:
+
+![Logic](/screenshot/logic.png)
