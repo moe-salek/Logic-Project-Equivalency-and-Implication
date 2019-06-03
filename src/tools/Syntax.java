@@ -118,7 +118,7 @@ public class Syntax {
         return true;
     }
 
-    public static String getChars4Var() {
+    static String getChars4Var() {
         return acceptedCharacter4Var;
     }
 
